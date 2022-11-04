@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/css/styles.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <title>jQuery</title>
+</head>
+<body>
+
+<!--<h1 class="mainText"></h1>-->
+
+<!--<p class="pText"></p>-->
+<!--<p class="pText1">FadeOut</p>-->
+<!--<p class="pText2">FadeTo</p>-->
+<!--<p class="pText3">SlideUp/Down</p>-->
+<!--<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFU7U2h0umyF0P6E_yhTX45sGgPEQAbGaJ4g&usqp=CAU" alt="#">-->
+
+<!--<button>↥</button>-->
+<!--<div class="gallery">-->
+<!--    <div class="big">-->
+<!--        <img src="images/1.jpg" alt="Current picture">-->
+<!--    </div>-->
+<!--    <div class="small">-->
+<!--        <a href="images/1.jpg"><img src="images/1.jpg" alt="image1#"></a>-->
+<!--        <a href="images/2.jpg"><img src="images/2.jpg" alt="image2#"></a>-->
+<!--        <a href="images/3.jpg"><img src="images/3.jpg" alt="image3#"></a>-->
+<!--        <a href="images/4.jpg"><img src="images/4.jpg" alt="image4#"></a>-->
+<!--        <a href="images/5.jpg"><img src="images/5.jpg" alt="image5#"></a>-->
+<!--        <a href="images/6.jpg"><img src="images/6.jpg" alt="image6#"></a>-->
+<!--        <a href="images/7.jpg"><img src="images/7.jpg" alt="image7#"></a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<h1>Text shadow generator</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-4 col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary">Settings:</div>
+                <div class="card-body">
+                    <label for="font-size">Font-size</label>
+                    <input class="custom-range" id="font-size" type="range" min="8" max="40" step="1" value="40">
+
+                    <label for="offset_x">Offset X</label>
+                    <input class="custom-range" id="offset_x" type="range" min="-15" max="15" step="1" value="4">
+
+                    <label for="offset_y">Offset Y</label>
+                    <input class="custom-range" id="offset_y" type="range" min="-15" max="15" step="1" value="-1">
+
+                    <label for="blur">Blur</label>
+                    <input class="custom-range" id="blur" type="range" min="0" max="15" step="1" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary">Colour:</div>
+                <div class="card-body">
+                    <input type="color" value="#ff0000">
+                    <label for="opacity">Opacity</label>
+                    <input class="custom-range" id="opacity" type="range" min="0" max="1" step=".01" value="1">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary">Result:</div>
+                <div class="card-body">
+                    <label for="resultHEX">Colour in HEX</label>
+                    <textarea id="resultHEX" rows="4" readonly></textarea><br />
+
+                    <label for="resultRGBa">Colour in RGBA</label>
+                    <textarea id="resultRGBa" rows="4" readonly></textarea><br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="jquery-3.6.1.min.js"></script>
+<!--<script src="jQCode.js"></script>-->
+<script>
+    function cssShadow({
+                           font_size,
+                           offset_x,
+                           offset_y,
+                           blur,
+                           opacity,
+                           color,
+                           rgba
+                       }) {
+        const cssStyles = offset_x + 'px ' + offset_y + 'px ' + blur + 'px ' + rgba;
+        $('h1').css('text-shadow', cssStyles);
+        $('#resultHEX').val('background-color: ' + color + ';\nopacity: ' + opacity + ';\nfont-size: ' + font_size + 'px;');
+        $('#resultRGBa').val('text-shadow: ' + offset_x + 'px ' + offset_y + 'px ' + blur + 'px ' + rgba + ';\nfont-size: ' + font_size + 'px;');
+    }
+    cssShadow({
+        font_size: 40,
+        offset_x: 4,
+        offset_y: -1,
+        blur: 0,
+        opacity: 1,
+        color: '#ff0000',
+        rgba: 'rgba(255, 0, 0, 1)'
+    });
+    $(document).on('input change', 'input', function () {
+        const font_size = $('#font-size').val();
+        const offset_x = $('#offset_x').val();
+        const offset_y = $('#offset_y').val();
+        const blur = $('#blur').val();
+        const opacity = $('#opacity').val();
+        const color = $('input[type="color"]').val() + '';
+        const [red16, green16, blue16] = [color[1] + '' + color[2], color[3] + '' + color[4], color[5] + '' + color[6]];
+        const [red10, green10, blue10] = [parseInt(red16, 16), parseInt(green16, 16), parseInt(blue16, 16)];
+        const rgba = 'rgba(' + red10 + ', ' + green10 + ', ' + blue10 + ', ' + opacity + ')';
+
+        $('h1').css('font-size', font_size + 'px');
+        cssShadow({
+            font_size: font_size,
+            offset_x: offset_x,
+            offset_y: offset_y,
+            blur: blur,
+            opacity: opacity,
+            color: color,
+            rgba: rgba
+        });
+    });
+</script>
+</body>
+</html>

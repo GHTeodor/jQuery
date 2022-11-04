@@ -1,0 +1,49 @@
+body {
+  text-align: center;
+  background-color: #eee;
+}
+body label {
+  display: block;
+}
+body h1 {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 6px;
+  font-size: 40px;
+  color: black;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+body input[type=range] {
+  width: 100%;
+}
+body input[type=color] {
+  border: none;
+  background-color: transparent;
+  width: 55px;
+  height: 55px;
+  padding: 0;
+  margin-bottom: 15px;
+}
+body input[type=color]:hover {
+  cursor: pointer;
+}
+body textarea {
+  width: 100%;
+  resize: none;
+  margin-bottom: 15px;
+  min-width: 300px;
+  font-size: 13px;
+}
+body .card {
+  height: 100%;
+}
+body .card-header {
+  font-weight: bold;
+  color: white;
+}
+body .row > div {
+  margin-bottom: 15px;
+}
+
+/*# sourceMappingURL=styles.css.map */
